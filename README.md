@@ -11,4 +11,14 @@
 5. SET/EXPORT vault address and vault token for vault cli
    SET VAULT_ADDR= the "address" value from service-key
    SET VAULT_TOKEN= the "token" value from service-key
-
+6. use vault cli to write data
+  vault write "$generic"/dss/common key1=value1 key2=value2
+7. use vault clie to read data
+  vault read "$generic"/dss/common
+8. use vault cli to create dss transit key ring
+  vault write -f "$generic"/keys/dssKeyRing
+9. use vault cli to encrypt data
+  vault write -f "$transit"/encrypt/dssKeyRing plaintext="$base64 encoded valute"
+10. use vault cli to decrypt data
+ vault write -f "$transit"/decrypt/dssKeyRing ciphertext="$ciphertest"
+11. use base64 decode to decode above decrypted value.
