@@ -18,9 +18,15 @@
 8. use vault cli to create dss transit key ring
   vault write -f "$transit"/keys/dssKeyRing
 9. use vault cli to encrypt data
-  vault write -f "$transit"/encrypt/dssKeyRing plaintext="$base64 encoded valute"
+  vault write -f "$transit"/encrypt/dssKeyRing plaintext=$(base64 <<< "value to be encrypted")
+  ex.
+  $ vault write -f cf/e4bade4e-7a83-405e-b130-1ecfcfc12377/transit/encrypt/dssKeyRing plaintext=$(base64 <<< "db2user")
+
  vault write cf/d87e5f07-b57d-4176-b79c-a7f990212b21/secret/application,cloud db2-username=vault:v1:FJhXb9PBOaN/TV/uYL14MxEPdzRO8PiSR/RqW/rl7Uejen5Mdw== db2-password=vault:v1:gVVH/ibx7OgC4sVqpkdkdRbQPO28cuxxK4A6JCKi1T06nT9q
 2-password=vault:v1:gVVH/ibx7OgC4sVqpkdkdRbQPO28cuxxK4A6JCKi1T06nT9q
 10. use vault cli to decrypt data
  vault write -f "$transit"/decrypt/dssKeyRing ciphertext="$ciphertest"
 11. use base64 decode to decode above decrypted value.
+or pipe it: 
+$ vault write -field=plaintext cf/e4bade4e-7a83-405e-b130-1ecfcfc12377/transit/decrypt/dssKeyRing ciphertext=vault:v1:nqK7hfjkgOkuiKOPVMHNFXIVyrEuazPtEj8OJOxPTVik2aUH | base64 --decode
+
