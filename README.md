@@ -16,7 +16,7 @@
 7. use vault clie to read data
   vault read "$generic"/dss/common
 8. use vault cli to create dss transit key ring
-  vault write -f "$generic"/keys/dssKeyRing
+  vault write -f "$transit"/keys/dssKeyRing
 9. use vault cli to encrypt data
   vault write -f "$transit"/encrypt/dssKeyRing plaintext="$base64 encoded valute"
  vault write cf/d87e5f07-b57d-4176-b79c-a7f990212b21/secret/application,cloud db2-username=vault:v1:FJhXb9PBOaN/TV/uYL14MxEPdzRO8PiSR/RqW/rl7Uejen5Mdw== db2-password=vault:v1:gVVH/ibx7OgC4sVqpkdkdRbQPO28cuxxK4A6JCKi1T06nT9q
